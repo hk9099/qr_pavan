@@ -18,12 +18,6 @@
             margin: auto !important;
         }
 
-        img {
-            width: 50% !important;
-            height: 50% !important;
-            margin: auto !important;
-        }
-
         .is-overflow-hidden {
             overflow: hidden;
         }
@@ -78,10 +72,10 @@
 
     <script>
         var qrcode = new QRCode("qrcode");
-
         function makeCode() {
             var elText = document.getElementById("text");
 
+            
             if (!elText.value) {
                 elText.focus();
                 return;
