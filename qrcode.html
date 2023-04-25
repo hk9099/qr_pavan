@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Generate QR Code in Browser">
+    <meta name="author" content="Dhrunil Virani/Bhargav Parmar">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="QR Code, QR Code Generator, QR Code Scanner, QR Code in Browser">
+    <title>Generate QR Code in Browser</title>
+    <link rel="icon" href="pe.jpeg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" />
+    <style>
+        #qrcode {
+            width: 100vw !important;
+            height: 100% !important;
+            margin: auto !important;
+        }
+
+        img {
+            width: 50% !important;
+            height: 50% !important;
+            margin: auto !important;
+        }
+
+        .is-overflow-hidden {
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #0a0ec8;
+            background-image: -webkit-radial-gradient(circle, #0a0ec8 12%, #d41cd1 60%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            text-fill-color: transparent;
+            -webkit-text-fill-color: transparent;
+            font-size: 2rem !important;
+        }
+
+        hr {
+            border: 1px solid #0a0ec8;
+        }
+    </style>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+
+<body>
+    <section class="section">
+
+        <h1 class="title has-text-centered">PAVAN ENTERPRICE</h1>
+
+        <hr>
+
+        <div class="container is-overflow-hidden">
+            <div class="columns is-vcentered">
+                <div class="column is-6-desktop is-12-mobile">
+                    <div class="field">
+                        <label class="label">QR Code Content</label>
+                        <div class="control">
+                            <input id="text" class="input" type="text" value=""
+                                placeholder="Enter content to generate QR code">
+                        </div>
+                    </div>
+                    <div class="field is-6-desktop is-12-mobile">
+                        <div class="control">
+                            <a id="download" class="button is-link is-fullwidth">Download QR Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="column is-6-desktop is-12-mobile has-text-centered">
+                <div id="qrcode" class="has-text-centered"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var qrcode = new QRCode("qrcode");
+
+        function makeCode() {
+            var elText = document.getElementById("text");
+
+            if (!elText.value) {
+                elText.focus();
+                return;
+            }
+
+            qrcode.makeCode(elText.value, {
+                margin: 4,
+                text: elText.value,
+            });
+
+            document.getElementById('download').href = document.getElementById('qrcode').getElementsByTagName('img')[0].src;
+            document.getElementById('download').download = 'qr_code.png';
+        }
+        makeCode();
+
+        $("#text").on("blur", function () {
+            makeCode();
+        }).on("keyup", function (e) {
+            makeCode();
+        });
+    </script>
+
+
+</body>
+
+</html>
